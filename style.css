@@ -8,8 +8,9 @@
   --dark-mode-cell-border: #262626;
   --dark-mode-cell-color: #3f3f3f;
   --light-mode-background: #f2f2f2;
-  --light-mode-cell-border: #434343;
-  --light-mode-cell-color: #dbdbdb;
+  --light-mode-cell-border: #c9c9c9;
+  --light-mode-cell-color: #e6e6e6;
+  --light-mode-border: #434343;
 }
 
 *,
@@ -42,7 +43,7 @@ body {
 
 /* ---------------------------------------------------------------- 
 /* GAME BOARD  */
-#game-board {
+.game-container {
   display: grid;
   grid-template-rows: repeat(var(--grid-size), var(--cell-size));
   grid-template-columns: repeat(var(--grid-size), var(--cell-size));
@@ -101,7 +102,7 @@ body {
   width: 80vw;
   gap: 10vmin;
   border-bottom: 1px solid var(--dark-mode-color);
-  background-color: var(--dark-mode-background);
+  /* background-color: var(--dark-mode-background); */
 }
 
 .btn,
@@ -110,14 +111,16 @@ body {
   align-self: center;
   color: var(--dark-mode-color);
   border: none;
-  text-shadow: 4px 4px 0 rgba(238, 39, 39, 0.1);
 }
 
 .btn {
   flex: 1;
   background-color: var(--dark-mode-background);
   height: 70%;
-  border: 2px solid hotpink;
+  font-size: 3vmax;
+  justify-content: center;
+  align-items: center;
+  /* border: 2px solid hotpink; */
 }
 
 .btn:hover {
@@ -152,6 +155,34 @@ body {
   position: relative;
   display: block;
 }
+/* ----------------------------------------------------------
+/* LIGHT MODE  */
+.light {
+  color: var(--light-mode-color);
+  background-color: var(--light-mode-background);
+}
+
+.light--header {
+  color: var(--light-mode-color);
+  border-bottom: 1px solid var(--light-mode-border);
+}
+
+.light--game-board {
+  background-color: var(--light-mode-cell-border);
+}
+
+.light--cell {
+  border-bottom: 1px solid var(--light-mode-cell-color);
+}
+
+.light--tile {
+  background-color: hsl(200, 69%, var(--background-lightness));
+  color: hsl(200, 25%, var(--text-lightness));
+}
+
+.light--cell {
+  background-color: var(--light-mode-cell-color);
+}
 
 /* ----------------------------------------------------------
 /* MEDIA QUERIES   */
@@ -162,6 +193,11 @@ body {
 
   .header {
     font-size: 3vmax;
+    transition: ease all 0.5s;
+  }
+
+  .btn {
+    font-size: 2vmax;
     transition: ease all 0.5s;
   }
 }
@@ -177,8 +213,8 @@ body {
     transition: ease all 0.5s;
   }
 
-  /* .scoreboard {
-    display: flex;
-    flex-direction: row;
-  } */
+  .btn {
+    font-size: 0.8em;
+    transition: ease all 0.5s;
+  }
 }

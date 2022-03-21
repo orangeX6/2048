@@ -7,6 +7,8 @@ export default class Tile {
   constructor(gameBoard, value = Math.random() > 0.2 ? 2 : 4) {
     this.#tileElement = document.createElement('div');
     this.#tileElement.classList.add('tile');
+    if (localStorage.theme === 'light')
+      this.#tileElement.classList.add('light--tile');
     gameBoard.append(this.#tileElement);
     this.value = value;
   }

@@ -6,11 +6,13 @@ import Tile from './scripts/tile.js';
 
 const gameBoard = document.getElementById('game-board');
 const score = document.querySelector('.score');
+const restart = document.querySelector('.btn--restart');
+const dark = document.querySelector('.btn--dark');
+localStorage.setItem('theme', 'dark');
 
 const grid = new Grid(gameBoard);
 grid.randomEmptyCell().tile = new Tile(gameBoard);
 grid.randomEmptyCell().tile = new Tile(gameBoard);
-let sc = 0;
 
 const slideTiles = cellsArray => {
   return Promise.all(
@@ -71,7 +73,16 @@ const moveTiles = async e => {
 
   if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
     newTile.waitForTransition(true).then(() => {
-      alert('game over');
+      if (localStorage.highScore) {
+        if (Number(score.textContent) > Number(localStorage.highScore)) {
+          localStorage.setItem('highScore', score.textContent);
+          alert(`New High Score!!! ${localStorage.getItem('highScore')}`);
+        } else {
+          alert('game over');
+        }
+      } else {
+        localStorage.highScore = Number(score.textContent);
+      }
     });
     return;
   }
@@ -101,3 +112,40 @@ const canMove = cellsArray => {
     });
   });
 };
+
+const init = () => {
+  grid.cells.forEach(cell => {
+    if (cell.tile) {
+      cell.tile.removeTile();
+      cell.tile = null;
+    }
+  });
+  grid.randomEmptyCell().tile = new Tile(gameBoard);
+  grid.randomEmptyCell().tile = new Tile(gameBoard);
+  score.textContent = 0;
+  setControls();
+};
+
+restart.addEventListener('click', init);
+
+const mode = () => {
+  localStorage.theme = `${localStorage.theme === 'dark' ? 'light' : 'dark'}`;
+  document.querySelector('body').classList.toggle('light');
+  // document.queryS
+  document.querySelector('.header').classList.toggle('light--header');
+  document.querySelector('.title').classList.toggle('light');
+  document
+    .querySelectorAll('.btn')
+    .forEach(btn => btn.classList.toggle('light'));
+  document
+    .querySelector('.game-container')
+    .classList.toggle('light--game-board');
+  document
+    .querySelectorAll('.cell')
+    .forEach(cell => cell.classList.toggle('light--cell'));
+  document
+    .querySelectorAll('.tile')
+    .forEach(tile => tile.classList.toggle('light--tile'));
+};
+
+dark.addEventListener('click', mode);
