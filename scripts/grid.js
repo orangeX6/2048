@@ -1,7 +1,3 @@
-// --grid-size: 4;
-// --cell-size: 15vmin;
-// --cell-gap: 2vmin;
-
 const CELL_GAP = 2;
 const GRID_SIZE = 4;
 const CELL_SIZE = 60 / GRID_SIZE;

@@ -1,9 +1,6 @@
 import Grid from './scripts/grid.js';
 import Tile from './scripts/tile.js';
 
-// import Grid from './Grid.js';
-// import Tile from './Tile.js';
-
 const gameBoard = document.getElementById('game-board');
 const score = document.querySelector('.score');
 const restart = document.querySelector('.btn--restart');
@@ -42,16 +39,16 @@ const slideTiles = cellsArray => {
   );
 };
 
-const direction = key => {
-  if (key === 'ArrowUp') slideTiles(grid.cellsByColumn);
+const direction = async key => {
+  if (key === 'ArrowUp') await slideTiles(grid.cellsByColumn);
 
   if (key === 'ArrowDown')
-    slideTiles(grid.cellsByColumn.map(column => [...column].reverse()));
+    await slideTiles(grid.cellsByColumn.map(column => [...column].reverse()));
 
-  if (key === 'ArrowLeft') slideTiles(grid.cellsByRow);
+  if (key === 'ArrowLeft') await slideTiles(grid.cellsByRow);
 
   if (key === 'ArrowRight')
-    slideTiles(grid.cellsByRow.map(row => [...row].reverse()));
+    await slideTiles(grid.cellsByRow.map(row => [...row].reverse()));
 };
 
 const moveTiles = async e => {
