@@ -26,6 +26,7 @@ body {
   margin: 0;
   background-color: var(--dark-mode-background);
   color: var(--dark-mode-color);
+  filter: brightness(0.8) contrast(1.2);
 }
 
 /* -------------------------------------------------------------
@@ -83,6 +84,7 @@ body {
   font-weight: bold;
   animation: show 200ms ease-in-out;
   transition: 100ms ease-in-out;
+  /* filter: brightness(0.8) contrast(1.2); */
 }
 
 @keyframes show {
@@ -120,6 +122,8 @@ body {
   font-size: 3vmax;
   justify-content: center;
   align-items: center;
+  filter: brightness(1.4) contrast(0.8);
+
   /* border: 2px solid hotpink; */
 }
 
@@ -160,6 +164,7 @@ body {
 .light {
   color: var(--light-mode-color);
   background-color: var(--light-mode-background);
+  filter: none;
 }
 
 .light--header {
