@@ -73,12 +73,16 @@ const moveTiles = async e => {
       if (localStorage.highScore) {
         if (Number(score.textContent) > Number(localStorage.highScore)) {
           localStorage.setItem('highScore', score.textContent);
-          alert(`New High Score!!! ${localStorage.getItem('highScore')}`);
+          alert(`🎊🎊🎊 New High Score!!! 🎊🎊🎊
+                        ${localStorage.getItem('highScore')}`);
         } else {
-          alert('game over');
+          alert(`💥💥💥💥💥💥Game Over.💥💥💥💥💥💥
+                      Your Score: ${score.textContent}
+                      High Score: ${localStorage.getItem('highScore')}`);
         }
       } else {
         localStorage.highScore = Number(score.textContent);
+        alert('Game Over. Your Score: ' + score.textContent);
       }
     });
     return;
